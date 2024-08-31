@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part Size Finder</title>
+</head>
+<body>
+    <h1>Find the Correct Size</h1>
+    <input type="file" id="upload" accept="image/*">
+    <button onclick="uploadImage()">Scan</button>
+    <p id="result"></p>
+
+    <script>
+        async function uploadImage() {
+            const fileInput = document.getElementById('upload');
+            const file = fileInput.files[0];
+            const formData = new FormData();
+            formData.append('image', file);
+
+            const response = await fetch('/predict', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+            document.getElementById('result').innerText = `Measurements: ${result.measurements.join(', ')}`;
+        }
+    </script>
+</body>
+</html>
