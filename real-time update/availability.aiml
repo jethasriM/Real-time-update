@@ -1,0 +1,14 @@
+<aiml version="0.9.3">
+    <category>
+        <pattern>CHECK AVAILABILITY OF *</pattern>
+        <template>
+            <python>
+                import sys
+                sys.path.insert(0, '"C:\Users\HP\Downloads\Walmart_Hackathon\real-time update\chatbot.py"')
+                from your_scraping_script import check_product_availability
+                product_url = 'https://www.walmart.com/ip/Samsung-Galaxy-S21-Ultra-5G-Smartphone-128GB/641645144' + request.topic()
+                return check_product_availability(product_url)
+            </python>
+        </template>
+    </category>
+</aiml>
